@@ -1,19 +1,81 @@
 openapi: 3.0.3
 info:
-  title: Sample API
-  description: API description in Markdown.
+  title: Challenge 1.0 back-end
   version: 1.0.0
 servers:
   - url: 'https://api.example.com'
+components:
+  schemas:
+    AccelerationArray:
+      description: A JSON Array consisting of JSON Objects.
+      type: array
+      items:
+        type: object
+        properties:
+          latitude:
+            type: number
+          longitude:
+            type: number
+          acceleration:
+            type: number
+        required:
+          - latitude
+          - longitude
+          - acceleration
+
+      example:
+        - latitude: -29.22025
+          longitude: -141.26640
+          acceleration: 0.243
+        - latitude: 31.65889
+          longitude: -119.64971
+          acceleration: -0.05
+
+
+
 paths:
   /anomalies:
-    get:
-      summary: Returns a list of anomalies.
+    post:
+      summary: Submit a list of acceleration values to be stored in the database.
+      requestBody:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccelerationArray'
       responses:
         '200':
           description: OK
+    get:
+      responses:
+        '200':
+          description: Detect anomalitic acceleration values and return them with their respective locations of occurence.
           content:
             application/json:
               schema:
-                type: array
+                $ref: '#/components/schemas/AccelerationArray'
+  /threshold:
+    patch:
+      summary: Change the thresholds that are used for the detection of anomalistic acceleration values.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                upper:
+                  type: number
+                  description: Upper threshold for non anomalitic acceleration (>=0)
+                lower:
+                  type: number
+                  description: Lower threshold for non anomalitic acceleration (<=0)
+              example:
+                upper: 23.4
+                lower: -9.05
+
+
+      responses:
+        '200':
+          description: 'OK'
+
 
