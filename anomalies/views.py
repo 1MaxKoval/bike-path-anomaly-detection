@@ -16,7 +16,6 @@ class AccelerationLocationView(APIView):
         ser = AccelerationLocationSerializer(models, many=True)
         return Response(ser.data)
 
-
     def post(self, request):
         ser = AccelerationLocationSerializer(data=request.data, many=True)
         ser.is_valid(raise_exception=True)
@@ -40,5 +39,3 @@ def set_threshold(request):
     ser.is_valid(raise_exception=True)
     ser.save()
     return Response(data=ser.data)
-
-
