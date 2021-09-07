@@ -65,7 +65,7 @@ paths:
               properties:
                 threshold:
                   type: number
-                  description: Upper threshold for non anomalitic acceleration (>=0)
+                  description: Upper threshold for non anomalitic acceleration (>=0).
               example:
                 threshold: 10.53
 

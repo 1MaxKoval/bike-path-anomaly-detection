@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'anomalies',
 ]
 
 MIDDLEWARE = [
@@ -71,8 +73,20 @@ WSGI_APPLICATION = 'bike_path_anomaly_detection.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE_URL = os.getenv('DATABASE_URL')
-DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
+if os.getenv('TEST') == 'True':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('DEV_DATABASE_NAME'),
+            'USER': os.getenv('DEV_DATABASE_USER'),
+            'PASSWORD': os.getenv('DEV_DATABASE_PASSWORD'),
+            'HOST': os.getenv('DEV_DATABASE_HOST'),
+            'PORT': os.getenv('DEV_DATABASE_PORT'),
+        }
+    }
+elif os.getenv('TEST') == 'False':
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
