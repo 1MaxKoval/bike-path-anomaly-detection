@@ -19,5 +19,5 @@ class AccelerationThresholdSerializer(serializers.ModelSerializer):
         fields = ['name', 'threshold']
         extra_kwargs = {
             'name': {'allow_blank': False, 'max_length': 25, 'required': False, 'read_only': False},
-            'threshold': {'max_digits': 10, 'min_value': 0, 'decimal_places': 5}
+            'threshold': {'max_digits': 10, 'min_value': -1, 'decimal_places': 5}
         }
