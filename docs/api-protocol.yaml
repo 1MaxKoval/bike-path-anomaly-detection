@@ -29,7 +29,7 @@ components:
           acceleration: 0.243
         - latitude: 31.65889
           longitude: -119.64971
-          acceleration: -0.05
+          acceleration: 0.05
 
 
 
@@ -56,22 +56,18 @@ paths:
                 $ref: '#/components/schemas/AccelerationArray'
   /threshold:
     patch:
-      summary: Change the thresholds that are used for the detection of anomalistic acceleration values.
+      summary: Change the threshold that is used for the detection of anomalistic acceleration values.
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                upper:
+                threshold:
                   type: number
                   description: Upper threshold for non anomalitic acceleration (>=0)
-                lower:
-                  type: number
-                  description: Lower threshold for non anomalitic acceleration (<=0)
               example:
-                upper: 23.4
-                lower: -9.05
+                threshold: 10.53
 
 
       responses:
