@@ -3,7 +3,7 @@ info:
   title: Challenge 1.0 back-end
   version: 1.0.0
 servers:
-  - url: 'https://api.example.com'
+  - url: 'https://hidden-savannah-80837.herokuapp.com/'
 components:
   schemas:
     AccelerationArray:
