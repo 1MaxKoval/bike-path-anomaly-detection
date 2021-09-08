@@ -29,6 +29,12 @@ class AccelerationLocationView(APIView):
         print(response.data)
         return Response(data=ser.data)
 
+    def delete(self, request):
+        vals = AccelerationLocation.objects.all()
+        vals.delete()
+        return Response(data={'success': 'deleted'})
+
+
 
 @api_view(['PATCH', 'POST'])
 def set_threshold(request):
