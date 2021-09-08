@@ -18,8 +18,11 @@ class AccelerationLocationView(APIView):
 
     def post(self, request):
         ser = AccelerationLocationSerializer(data=request.data, many=True)
+        print(request.data)
         ser.is_valid(raise_exception=True)
         ser.save()
+        response = Response(data=ser.data)
+        print(response.data)
         return Response(data=ser.data)
 
 
