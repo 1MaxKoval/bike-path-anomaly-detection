@@ -3,6 +3,7 @@ from anomalies.models import AccelerationLocation, AccelerationThreshold
 from anomalies.api.serializers import AccelerationLocationSerializer, AccelerationThresholdSerializer
 from rest_framework.views import Response, APIView
 from rest_framework.decorators import api_view
+from rest_framework import status
 
 
 class AccelerationLocationView(APIView):
@@ -19,7 +20,10 @@ class AccelerationLocationView(APIView):
     def post(self, request):
         ser = AccelerationLocationSerializer(data=request.data, many=True)
         print(request.data)
-        ser.is_valid(raise_exception=True)
+        ser.is_valid()
+        if ser.errors:
+            print(ser.errors)
+            return Response(data=ser.errors, status=status.HTTP_400_BAD_REQUEST)
         ser.save()
         response = Response(data=ser.data)
         print(response.data)
