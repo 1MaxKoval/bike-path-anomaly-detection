@@ -5,8 +5,9 @@ from anomalies.models import AccelerationLocation, AccelerationThreshold
 class AccelerationLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccelerationLocation
-        fields = ['longitude', 'latitude', 'acceleration']
+        fields = ['id', 'longitude', 'latitude', 'acceleration']
         extra_kwargs = {
+            'id': {'read_only': True},
             'longitude': {'max_digits': 100, 'decimal_places': 10},
             'latitude': {'max_digits': 100, 'decimal_places': 10},
             'acceleration': {'max_digits': 10, 'decimal_places': 5, 'min_value': 0}
