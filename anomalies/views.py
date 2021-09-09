@@ -21,8 +21,10 @@ class AccelerationLocationView(APIView):
         ser = AccelerationLocationSerializer(data=request.data, many=True)
         print(request.data)
         ser.is_valid()
+        breakpoint()
         if ser.errors:
             print(ser.errors)
+            breakpoint()
             return Response(data=ser.errors, status=status.HTTP_400_BAD_REQUEST)
         ser.save()
         response = Response(data=ser.data)

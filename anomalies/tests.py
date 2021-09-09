@@ -19,16 +19,15 @@ class TestAccelerationViews(APITestCase):
         response = AccelerationLocationView.as_view()(request)
         self.assertTrue(len(list(response.data)), 3)
 
-    def test_post_accelerations(self):
+    def test_post_acceleration_duplicate_coordinates(self):
         data = [
             {'latitude': 12.44, 'longitude': -123.0, 'acceleration': 0.54},
             {'latitude': 12.44, 'longitude': -123.0, 'acceleration': 0.54},
-            {'latitude': 12.44, 'longitude': -123.0, 'acceleration': 0.54},
-            {'latitude': 0.44, 'longitude': -123.0, 'acceleration': 0.54}
         ]
         request = self.rf.post('/anomalies', data=data, format='json')
         response = AccelerationLocationView.as_view()(request)
         self.assertTrue(True)
+
 
     def test_post_set_threshold(self):
         data = {'threshold': 20.0}

@@ -1,3 +1,4 @@
+from rest_framework.validators import UniqueTogetherValidator
 from rest_framework import serializers
 from anomalies.models import AccelerationLocation, AccelerationThreshold
 
@@ -12,6 +13,12 @@ class AccelerationLocationSerializer(serializers.ModelSerializer):
             'latitude': {'max_digits': 100, 'decimal_places': 10},
             'acceleration': {'max_digits': 10, 'decimal_places': 5, 'min_value': 0}
         }
+        validators = [
+            UniqueTogetherValidator(
+                queryset=AccelerationLocation.objects.all(),
+                fields=['latitude', 'longitude']
+            )
+        ]
 
 
 class AccelerationThresholdSerializer(serializers.ModelSerializer):
